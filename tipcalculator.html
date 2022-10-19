@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <style>
+
+  body {
+    background-color: rgb(63, 64, 63);
+    font-size: 28px;
+    color: rgb(0, 255, 225);
+    font-family: Arial;
+    text-align: center;
+    text-shadow: 5px 5px gray;
+  }
+
+  button {
+    margin-left: 50px;
+  }
+
+  div {
+    text-align: left;
+    width: 25%;
+    margin: 50px;
+    border: 1px solid black;
+  }
+
+  h1, h3 {
+    margin-left: 50px;
+  }
+
+  input {
+    margin-left: 50px;
+  }
+
+  option {
+    margin-left: 50px;
+  }
+
+  p {
+    margin-left: 50px;
+  }
+
+  select {
+    margin-left: 50px;
+  }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <script>
+
+
+  //PRE:
+  //POST: the element with id = "tip" contains
+  //      an integer with the dollar amount of the tip.
+  function calculateTip() {
+    var billAmount = document.getElementById("billAmount").value;
+    var service = document.getElementById("service").value;
+    var numPeople = document.getElementById("numPeople").value;
+    var tipPercent = calculateTipPercentage(service);
+
+
+    if(numPeople > 0 && billAmount > 0) {
+      var tip = (billAmount * tipPercent)/numPeople;
+      document.getElementById("tip").innerHTML = "$ " + tip.toFixed(2);
+    } else {
+      document.getElementById("tip").innerHTML = "<span style = 'color:red'>Error: A value was less than or equal to 0.</span>";
+    }
+  }
+
+  //PRE: serivce is a well defined string
+  //POST: returns 0.1, 0.15, 0.2, or 0.3 if
+  // service is poor, fair, good, or excellent respectively.
+  function calculateTipPercentage(service) {
+    var tipPercent = 0.0;
+
+    if(service == "poor") {
+      tipPercent = 0.1;
+    } else if (service == "fair") {
+      tipPercent = 0.15;
+    } else if (service == "good") {
+      tipPercent = 0.2;
+    } else if (service == "excellent") {
+      tipPercent = 0.3;
+    }
+
+    return(tipPercent);
+
+  }
+
+  </script>
+
+
+  <h1>Welcome to Tip Calculator</h1>
+
+  <div>
+    <form>
+      <p>How much was your bill?</p>
+      <input type = "number" placeholder = "Bill Amount in USD" id = "billAmount">
+      <br>
+      <br>
+      <p>How was your service?</p>
+      <select id = "service">
+        <option value = "poor">Poor</option>
+        <option value = "fair">Fair</option>
+        <option value = "good">Good</option>
+        <option value = "excellent">Excellent</option>
+      </select>
+      <br>
+      <br>
+      <p>How many people are sharing the bill?</p>
+      <input type = "number" placeholder = "Number of People" id = "numPeople"> People
+      <br>
+      <br>
+      <button type = "button" onclick = "calculateTip()">Calculate Tip</button>
+      <br>
+      <br>
+    </form>
+  </div>
+
+  <div>
+    <h3>Tip Amount:</h3>
+    <p id = "tip">Not Calculated</p>
+  </div>
+
+</body>
+
+
+</html>
